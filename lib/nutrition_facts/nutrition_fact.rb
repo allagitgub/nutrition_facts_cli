@@ -14,10 +14,16 @@ class NutritionTopic
 
   def self.create_and_save_popular_topics(a_element)
     self.create_ant_save_topic_from_a_element(a_element_item, @@popular_tipics)
+    @@popular_tipics.each do |topic|
+      puts topic.name
+    end
   end
 
   def self.create_and_save_all_topics(a_element)
     self.create_ant_save_topic_from_a_element(a_element_item, @@all)
+    @@all.each do |topic|
+      puts topic.name
+    end
   end
 
   def self.create_ant_save_topic_from_a_element(a_element_item, store)
