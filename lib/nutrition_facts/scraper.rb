@@ -15,7 +15,7 @@ class Scraper
   end
 
   def self.scrape_popular_topics
-    self.create_topic_from_a_element(self.get_page.css(".topics-trending").css("a"))
+    NutritionTopic.create_and_save_popular_topics(self.get_page.css(".topics-trending").css("a"))
   end
 
   def self.scrape_topics_alphabetically
