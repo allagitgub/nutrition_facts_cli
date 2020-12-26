@@ -1,24 +1,25 @@
+require 'nokogiri'
+require 'open-uri'
 
 class Scraper
-  attr_accessor :page
-
-  def get_page
-    if(self.page == nil)
-      self.page = Nokogiri::HTML(open("https://nutritionfacts.org"))
+  #attr_accessor :page
+ @@page = nil
+  def self.get_page
+    if(@@page == nil)
+      @@page = Nokogiri::HTML(open("https://nutritionfacts.org/topics"))
     end
-      self.page
+      @@page
   end
 
-  def scrape_topics_list
-     puts doc.css(".topics-trending").css(".col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3").each do |topic|
-       
+  def self.scrape_topics_list
+    #puts self.get_page.css(".topics-trending")
+     self.get_page.css(".topics-trending").css("a").each do |topic|
+     puts topic["href"]
+     puts topic["title"]
+     NutritionTopic.new(topic["title"], topic["href"])
      end
+     #puts self.get_page.css(".topics-trending")
   end
+end
 
-  def make_restaurants
-    scrape_restaurants_index.each do |r|
-      WorldsBestRestaurants::Restaurant.new_from_index_page(r)
-    end
-  end
-end
-end
+Scraper.scrape_topics_list
