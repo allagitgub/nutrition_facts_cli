@@ -1,6 +1,8 @@
 require 'nokogiri'
 require 'open-uri'
 
+require_relative 'nutrition_fact'
+
 class Scraper
   #attr_accessor :page
  @@page = nil
