@@ -1,4 +1,5 @@
 require_relative 'nutrition_fact'
+require_relative 'scraper'
 
 class CLI
 
@@ -9,6 +10,7 @@ Scraper.new.get_all_topics
 end
 
 def start
+  Scraper.get_all_topics
   puts ""
   puts "Please type in the topic you would like to learn more?"
   input = gets.strip.chomp

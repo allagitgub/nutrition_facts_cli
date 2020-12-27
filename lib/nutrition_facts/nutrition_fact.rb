@@ -1,7 +1,8 @@
 class NutritionTopic
-  attr_accessor :name, :url, :list_of_videos, :doctors_note
+  attr_accessor :name, :url, :doctors_note, :list_of_videos
 
   @doc = nil
+  @list_of_videos
   @@all = []
   @@popular_tipics = []
   def initialize(name, url)
@@ -40,15 +41,18 @@ class NutritionTopic
   end
 
   def list_of_videos
-    @list_of_videos ||= get_list_of_videos
-    # @description ||= doc.xpath("//div[@class='c-8 nl nt']/p[3]").text
+    puts "list of videos"
+    #@list_of_videos ||= get_list_of_videos
+    #@description ||= doc.xpath("//div[@class='c-8 nl nt']/p[3]").text
+    @list_of_videos = get_list_of_videos
   end
 
   def get_list_of_videos
+    puts "calling get_list_of_videos "+self.url
     list = []
-    doc.css("container").css('a').each do |item|
-      list << item["href"]
+    doc.css(".list-unstyled").css("a").each do |item|
       puts item["href"]
+      list << item["href"]
     end
     list
   end
@@ -56,6 +60,8 @@ class NutritionTopic
   def self.lookup_topic_info(topic_name)
     this_topic = @@all.find do |topic| topic.name == topic_name
     end
+    puts @@all.count
+    puts this_topic == nil
     this_topic.list_of_videos.each do |video|
       puts video
     end
