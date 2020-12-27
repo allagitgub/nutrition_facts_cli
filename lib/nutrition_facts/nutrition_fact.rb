@@ -2,7 +2,6 @@ class NutritionTopic
   attr_accessor :name, :url, :doctors_note, :list_of_videos
 
   @doc = nil
-  @list_of_videos
   @@all = []
   @@popular_tipics = []
   def initialize(name, url)
