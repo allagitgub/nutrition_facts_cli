@@ -1,3 +1,5 @@
+require_relative 'nutrition_fact'
+
 class CLI
 
 def call
@@ -10,32 +12,7 @@ def start
   puts ""
   puts "Please type in the topic you would like to learn more?"
   input = gets.strip.chomp
-
-  print_restaurants(input)
-
-  puts ""
-  puts "What restaurant would you like more information on?"
-  input = gets.strip
-
-  restaurant = WorldsBestRestaurants::Restaurant.find(input.to_i)
-
-  print_restaurant(restaurant)
-
-  puts ""
-  puts "Would you like to see another restaurant? Enter Y or N"
-
-  input = gets.strip.downcase
-  if input == "y"
-    start
-  elsif input == "n"
-    puts ""
-    puts "Thank you! Have a great day!"
-    exit
-  else
-    puts ""
-    puts "I don't understand that answer."
-    start
-  end
+  NutritionTopic.lookup_topic_info(input)
 end
 
 def print_restaurant(restaurant)
@@ -71,3 +48,5 @@ def print_restaurants(from_number)
   end
 end
 end
+
+CLI.new.start

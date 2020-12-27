@@ -59,6 +59,5 @@ class NutritionTopic
     this_topic.list_of_videos.each do |video|
       puts video
     end
-
   end
 end
