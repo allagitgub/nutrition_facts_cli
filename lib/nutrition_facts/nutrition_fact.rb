@@ -42,19 +42,26 @@ class NutritionTopic
 
   def list_of_videos
     puts "list of videos"
-    #@list_of_videos ||= get_list_of_videos
+    @list_of_videos ||= get_list_of_videos
     #@description ||= doc.xpath("//div[@class='c-8 nl nt']/p[3]").text
-    @list_of_videos = get_list_of_videos
+    #@list_of_videos = get_list_of_videos
+  end
+
+  def doctors_note
+    puts "doctors_note"
+    @doctors_note ||= get_doctors_note
   end
 
   def get_list_of_videos
     puts "calling get_list_of_videos "+self.url
     list = []
-    doc.css(".list-unstyled").css("a").each do |item|
-      puts item["href"]
+    doc.css(".topic-videos").css(".container").css(".list-unstyled").css('a').each do |item|
       list << item["href"]
     end
     list
+  end
+
+  def get_doctors_note
   end
 
   def self.lookup_topic_info(topic_name)
