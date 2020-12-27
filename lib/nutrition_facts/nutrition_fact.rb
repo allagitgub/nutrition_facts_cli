@@ -1,3 +1,5 @@
+require_relative 'topic_video'
+
 class NutritionTopic
   attr_accessor :name, :url, :doctors_note, :list_of_videos
 
@@ -55,7 +57,9 @@ class NutritionTopic
     puts "calling get_list_of_videos "+self.url
     list = []
     doc.css(".topic-videos").css(".container").css(".list-unstyled").css('a').each do |item|
-      list << item["href"]
+      video_topic = TopicVideo.new(name, item["title"], item["href"])
+      video_topic.doctors_note
+      list << video_topic
     end
     list
   end
