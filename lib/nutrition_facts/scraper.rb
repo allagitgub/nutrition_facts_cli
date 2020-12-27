@@ -25,7 +25,8 @@ class Scraper
     end
   end
 
+  def self.get_all_topics
+    Scraper.scrape_topics_alphabetically
+  end
 
 end
-
-Scraper.scrape_topics_by_alphabet
