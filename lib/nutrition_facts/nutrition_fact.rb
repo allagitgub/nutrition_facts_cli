@@ -4,7 +4,7 @@ class NutritionTopic
   attr_accessor :name, :url, :doctors_note, :list_of_videos
 
   @doc = nil
-  @@all = []
+  @@all = Hash.new
   @@popular_tipics = []
   def initialize(name, url)
     @name = name
@@ -16,16 +16,23 @@ class NutritionTopic
   end
 
   def self.create_and_save_popular_topics(a_element)
-    self.create_ant_save_topic_from_a_element(a_element_item, @@popular_tipics)
+    self.create_and_save_topic_from_a_element(a_element, @@popular_tipics)
     @@popular_tipics.each do |topic|
       puts topic.name
     end
   end
 
-  def self.create_and_save_all_topics(a_element)
-    self.create_and_save_topic_from_a_element(a_element, @@all)
-    @@all.each do |topic|
-      puts topic.name
+  def self.create_and_save_all_topics(a_element, letter)
+    letter_list = @@all[letter]
+    if(letter_list == nil)
+      letter_list = []
+    end
+    self.create_and_save_topic_from_a_element(a_element, letter_list)
+    puts "letter_list after create and save" + letter
+    puts letter_list.count
+    @@all[letter] = letter_list
+    letter_list.each do |topic|
+      #puts topic.name
     end
   end
 
@@ -33,7 +40,6 @@ class NutritionTopic
     a_element.each do |item|
       topic = NutritionTopic.new(item["title"], item["href"])
       store << topic
-      #topic.list_of_videos
     end
   end
 
@@ -44,8 +50,6 @@ class NutritionTopic
   def list_of_videos
     puts "list of videos"
     @list_of_videos ||= get_list_of_videos
-    #@description ||= doc.xpath("//div[@class='c-8 nl nt']/p[3]").text
-    #@list_of_videos = get_list_of_videos
   end
 
   def doctors_note
@@ -67,13 +71,19 @@ class NutritionTopic
   def get_doctors_note
   end
 
-  def self.lookup_topic_info(topic_name)
-    this_topic = @@all.find do |topic| topic.name == topic_name
-    end
-    puts @@all.count
-    puts this_topic == nil
-    this_topic.list_of_videos.each do |video|
-      puts video
-    end
+  def self.lookup_topic_info_by_letter(topic_name, letter)
+    letter_list = @@all[letter.capitalize]
+    lookup_topic_info_for_list(topic_name, letter_list)
   end
+
+  def self.lookup_topic_info(topic_name)
+    Scraper.lookup_topic_info_for_list(topic_name, @@popular)
+  end
+
+  def self.lookup_topic_info_for_list(topic_name, list)
+    this_topic = list.find do |topic| topic.name == topic_name
+    end
+    this_topic.list_of_videos
+  end
+
 end

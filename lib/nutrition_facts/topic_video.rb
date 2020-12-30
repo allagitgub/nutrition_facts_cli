@@ -28,7 +28,6 @@ class TopicVideo
       end
       note + '\n'
     end
-    puts note
     note
   end
 

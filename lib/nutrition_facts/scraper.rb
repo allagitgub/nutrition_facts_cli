@@ -21,12 +21,16 @@ class Scraper
   def self.scrape_topics_alphabetically
     ALPHABET.each do |letter|
       doc = self.get_page.css('div#column_'+"#{letter}")
-      NutritionTopic.create_and_save_all_topics(doc.css('ul.list-unstyled').css('a'))
+      NutritionTopic.create_and_save_all_topics(doc.css('ul.list-unstyled').css('a'), letter)
     end
   end
 
   def self.get_all_topics
     Scraper.scrape_topics_alphabetically
+  end
+
+  def self.get_popular_topics
+    Scraper.scrape_popular_topics
   end
 
 end

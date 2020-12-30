@@ -10,11 +10,35 @@ Scraper.new.get_all_topics
 end
 
 def start
-  Scraper.get_all_topics
+  puts "Would you like to choose from popular topics or see all available topics, please type in 'popular' or 'all'"
+  choice = gets.chomp.downcase
+  puts choice
+  if choice == "popular"
+    Scraper.get_popular_topics
+  else
+    Scraper.get_all_topics
+  end
+
   puts ""
   puts "Please type in the topic you would like to learn more?"
   input = gets.strip.chomp
-  NutritionTopic.lookup_topic_info(input)
+
+  list_of_topic_videos = []
+  if choice == "popular"
+    list_of_topic_videos = NutritionTopic.lookup_topic_info(input)
+  else
+    letter = input[0]
+    list_of_topic_videos = NutritionTopic.lookup_topic_info_by_letter(input, letter)
+  end
+  puts "Which of the following subtopics, would you like to get more information on:"
+  list_of_topic_videos.each do |video|
+    puts video.video_name
+  end
+  input = gets.chomp
+  selected_video = list_of_topic_videos.find { |video| video.video_name = input}
+  puts "Video Name: "+selected_video.video_name
+  puts "Video youtube url: "+selected_video.video_url
+  puts "Video Doctor's Note: "+selected_video.doctors_note
 end
 
 def print_restaurant(restaurant)
