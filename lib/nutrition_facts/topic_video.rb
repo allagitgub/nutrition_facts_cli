@@ -7,6 +7,7 @@ class TopicVideo
   def initialize(topic_name, video_name, url)
     @topic_name = topic_name
     @video_name = video_name
+    puts video_name +" video name"
     @url = url
   end
 

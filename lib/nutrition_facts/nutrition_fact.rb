@@ -80,6 +80,19 @@ class NutritionTopic
     Scraper.lookup_topic_info_for_list(topic_name, @@popular)
   end
 
+  def self.display_popular_topics
+    @@popular.each do |topic|
+      puts topic.name
+    end
+  end
+
+  def self.display_topics_by_letter(letter)
+    list_of_topics = @@all[letter]
+    list_of_topics.each do |topic|
+      puts topic.name
+    end
+  end
+
   def self.lookup_topic_info_for_list(topic_name, list)
     this_topic = list.find do |topic| topic.name == topic_name
     end

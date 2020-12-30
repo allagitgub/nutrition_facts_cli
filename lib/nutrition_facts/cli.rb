@@ -9,18 +9,28 @@ Scraper.new.get_all_topics
   start
 end
 
+def valid_choice?(input)
+  input == 'popular' || Scraper::ALPHABET.includes?(input)
+end
+
 def start
-  puts "Would you like to choose from popular topics or see all available topics, please type in 'popular' or 'all'"
+  puts "Please type in 'popular' or 'a letter of the alphabet' to see peither opular topics or all topics starting with the letter you typed"
   choice = gets.chomp.downcase
   puts choice
+  while !valid_choice(choice)
+    puts "Your input is invalid, please try again"
+    choice = gets.chomp.downcase
+  end
   if choice == "popular"
     Scraper.get_popular_topics
+    NutritionTopic.display_popular_topics
   else
-    Scraper.get_all_topics
+      Scraper.get_all_topics
+      NutritionTopic.display_topics_by_letter(choice)
   end
 
   puts ""
-  puts "Please type in the topic you would like to learn more?"
+  puts "Please type in the topic you would like to learn more about:"
   input = gets.strip.chomp
 
   list_of_topic_videos = []
