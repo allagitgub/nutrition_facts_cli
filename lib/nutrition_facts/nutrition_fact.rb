@@ -94,6 +94,8 @@ class NutritionTopic
   end
 
   def self.lookup_topic_info_for_list(topic_name, list)
+    puts topic_name + "lookup_topic_info_for_list"
+
     this_topic = list.find do |topic| topic.name == topic_name
     end
     this_topic.list_of_videos
