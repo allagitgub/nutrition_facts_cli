@@ -1,6 +1,6 @@
 class TopicVideo
 
-  attr_accessor :topic_name, :video_name, :doctors_note, :url
+  attr_accessor :topic_name, :video_name, :doctors_note, :url, :vide_url
 
   @doc
 
@@ -30,5 +30,13 @@ class TopicVideo
     end
     puts note
     note
+  end
+
+  def video_url
+    @video_url ||= get_video_url
+  end
+
+  def get_video_url
+    self.doc.css(".youtube-video")[0]["src"]
   end
 end
