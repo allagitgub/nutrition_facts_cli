@@ -14,9 +14,10 @@ def valid_choice?(input)
 end
 
 def start
-  puts "Please type in 'popular' or 'a letter of the alphabet' to see peither opular topics or all topics starting with the letter you typed"
+  puts "Which Nutrition topic would you like to explore?"
+  puts "Please type in 'popular' or a letter of the alphabet (E.g.: 'a') to see all popular topics or all topics starting with the letter you typed"
+  puts ""
   choice = gets.chomp.downcase
-  puts choice
   while !valid_choice?(choice)
     puts "Your input is invalid, please try again"
     choice = gets.chomp.downcase
@@ -30,27 +31,37 @@ def start
   end
 
   puts ""
-  puts "Please choose from above and type in the topic you would like to learn more about:"
+  puts "Please type in a topic from above list for more information"
   input = gets.strip.chomp
-
+  puts ""
+  puts "Retrieving information..."
   list_of_topic_videos = []
   if choice == "popular"
     list_of_topic_videos = NutritionTopic.lookup_topic_info(input)
   else
-    puts input
-    puts input[0]
     letter = input[0].capitalize
     list_of_topic_videos = NutritionTopic.lookup_topic_info_by_letter(input, letter)
   end
+  puts ""
   puts "Which of the following subtopics, would you like to get more information on:"
+  puts ""
   list_of_topic_videos.each do |video|
-    puts video.video_name
+    puts "      - "+video.video_name
   end
+  puts ""
   input = gets.chomp
   selected_video = list_of_topic_videos.find { |video| video.video_name = input}
-  puts "Video Name: "+selected_video.video_name
-  puts "Video youtube url: "+selected_video.video_url
-  puts "Video Doctor's Note: "+selected_video.doctors_note
+  puts ""
+  puts "===================================================================================================================="
+  puts "Video Name: "
+  puts ""+selected_video.video_name
+  puts ""
+  puts "Video youtube url: "
+  puts ""+selected_video.video_url
+  puts ""
+  puts "Video Doctor's Note: "
+  puts ""+selected_video.doctors_note
+  puts "===================================================================================================================="
 end
 
 def print_restaurant(restaurant)

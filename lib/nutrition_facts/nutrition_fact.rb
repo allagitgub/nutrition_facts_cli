@@ -5,7 +5,7 @@ class NutritionTopic
 
   @doc = nil
   @@all = Hash.new
-  @@popular_tipics = []
+  @@popular_topics = []
   def initialize(name, url)
     @name = name
     @url = url
@@ -16,10 +16,7 @@ class NutritionTopic
   end
 
   def self.create_and_save_popular_topics(a_element)
-    self.create_and_save_topic_from_a_element(a_element, @@popular_tipics)
-    @@popular_tipics.each do |topic|
-      puts topic.name
-    end
+    self.create_and_save_topic_from_a_element(a_element, @@popular_topics)
   end
 
   def self.create_and_save_all_topics(a_element, letter)
@@ -28,12 +25,7 @@ class NutritionTopic
       letter_list = []
     end
     self.create_and_save_topic_from_a_element(a_element, letter_list)
-    puts "letter_list after create and save" + letter
-    puts letter_list.count
     @@all[letter] = letter_list
-    letter_list.each do |topic|
-      #puts topic.name
-    end
   end
 
   def self.create_and_save_topic_from_a_element(a_element, store)
@@ -48,17 +40,14 @@ class NutritionTopic
   end
 
   def list_of_videos
-    puts "list of videos"
     @list_of_videos ||= get_list_of_videos
   end
 
   def doctors_note
-    puts "doctors_note"
     @doctors_note ||= get_doctors_note
   end
 
   def get_list_of_videos
-    puts "calling get_list_of_videos "+self.url
     list = []
     doc.css(".topic-videos").css(".container").css(".list-unstyled").css('a').each do |item|
       video_topic = TopicVideo.new(name, item["title"], item["href"])
@@ -77,25 +66,23 @@ class NutritionTopic
   end
 
   def self.lookup_topic_info(topic_name)
-    Scraper.lookup_topic_info_for_list(topic_name, @@popular)
+    lookup_topic_info_for_list(topic_name, @@popular_topics)
   end
 
   def self.display_popular_topics
-    @@popular.each do |topic|
-      puts topic.name
+    @@popular_topics.each do |topic|
+      puts "      - "+topic.name
     end
   end
 
   def self.display_topics_by_letter(letter)
     list_of_topics = @@all[letter]
     list_of_topics.each do |topic|
-      puts topic.name
+      puts "      - "+topic.name
     end
   end
 
   def self.lookup_topic_info_for_list(topic_name, list)
-    puts topic_name + "lookup_topic_info_for_list"
-
     this_topic = list.find do |topic| topic.name.downcase == topic_name.downcase
     end
     this_topic.list_of_videos
