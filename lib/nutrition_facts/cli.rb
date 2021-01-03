@@ -70,7 +70,7 @@ def start
       puts "******************************************************************************************************************************************************************************************"
       puts ""
       input = gets.chomp
-      selected_video = list_of_topic_videos.find { |video| video.video_name == input}
+      selected_video = list_of_topic_videos.find { |video| video.video_name.downcase == input.downcase}
       if(selected_video == nil)
         puts ""
         puts "Invalid Input"
@@ -93,39 +93,6 @@ def start
     puts "******************************************************************************************************************************************************************************************"
     continue = gets.chomp.downcase
     puts ""
-  end
-end
-
-def print_restaurant(restaurant)
-  puts ""
-  puts "----------- #{restaurant.name} - #{restaurant.position} -----------"
-  puts ""
-  puts "#{restaurant.intro_quote}"
-  puts "Location:           #{restaurant.location}"
-  puts "Head Chef:          #{restaurant.head_chef}"
-  puts "Contact:            #{restaurant.contact}"
-  puts "Phone:             #{restaurant.phone}"
-  puts "Website:            #{restaurant.website_url}"
-
-  puts ""
-  puts "---------------Description--------------"
-  puts ""
-  puts "#{restaurant.description}"
-  puts ""
-
-  puts ""
-  puts "---------------About the Food--------------"
-  puts ""
-  puts "#{restaurant.food_style}"
-  puts ""
-end
-
-def print_restaurants(from_number)
-  puts ""
-  puts "---------- Restaurants #{from_number} - #{from_number+9} ----------"
-  puts ""
-  WorldsBestRestaurants::Restaurant.all[from_number-1, 10].each.with_index(from_number) do |restaurant, index|
-    puts "#{index}. #{restaurant.name} - #{restaurant.location}"
   end
 end
 end
