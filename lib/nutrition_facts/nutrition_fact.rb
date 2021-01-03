@@ -85,7 +85,11 @@ class NutritionTopic
   def self.lookup_topic_info_for_list(topic_name, list)
     this_topic = list.find do |topic| topic.name.downcase == topic_name.downcase
     end
-    this_topic.list_of_videos
+    if(this_topic == nil)
+      nil
+    else
+      this_topic.list_of_videos
+    end
   end
 
 end

@@ -30,18 +30,21 @@ def start
       NutritionTopic.display_topics_by_letter(choice.capitalize)
   end
 
-  puts ""
-  puts "Please type in a topic from above list for more information"
-  input = gets.strip.chomp
-  puts ""
-  puts "Retrieving information..."
   list_of_topic_videos = []
-  if choice == "popular"
-    list_of_topic_videos = NutritionTopic.lookup_topic_info(input)
-  else
-    letter = input[0].capitalize
-    list_of_topic_videos = NutritionTopic.lookup_topic_info_by_letter(input, letter)
+  while list_of_topic_videos == nil || list_of_topic_videos.count == 0
+    puts ""
+    puts "Please type in a topic from above list for more information"
+    input = gets.strip.chomp
+    puts ""
+    puts "Retrieving information..."
+    if choice == "popular"
+      list_of_topic_videos = NutritionTopic.lookup_topic_info(input)
+    else
+      letter = input[0].capitalize
+      list_of_topic_videos = NutritionTopic.lookup_topic_info_by_letter(input, letter)
+    end
   end
+
   puts ""
   puts "Which of the following subtopics, would you like to get more information on:"
   puts ""
