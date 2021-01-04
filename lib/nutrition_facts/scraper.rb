@@ -15,22 +15,22 @@ class NutritionFacts::Scraper
   end
 
   def self.scrape_popular_topics
-    NutritionFact.create_and_save_popular_topics(self.get_page.css(".topics-trending").css("a"))
+    NutritionFacts::NutritionFact.create_and_save_popular_topics(self.get_page.css(".topics-trending").css("a"))
   end
 
   def self.scrape_topics_alphabetically
     ALPHABET.each do |letter|
       doc = self.get_page.css('div#column_'+"#{letter}")
-      NutritionFact.create_and_save_all_topics(doc.css('ul.list-unstyled').css('a'), letter)
+      NutritionFacts::NutritionFact.create_and_save_all_topics(doc.css('ul.list-unstyled').css('a'), letter)
     end
   end
 
   def self.get_all_topics
-    Scraper.scrape_topics_alphabetically
+    NutritionFacts::Scraper.scrape_topics_alphabetically
   end
 
   def self.get_popular_topics
-    Scraper.scrape_popular_topics
+    NutritionFacts::Scraper.scrape_popular_topics
   end
 
 end

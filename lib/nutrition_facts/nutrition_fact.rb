@@ -50,7 +50,7 @@ class NutritionFacts::NutritionFact
   def get_list_of_videos
     list = []
     doc.css(".topic-videos").css(".container").css(".list-unstyled").css('a').each do |item|
-      video_topic = TopicVideo.new(name, item["title"], item["href"])
+      video_topic = NutritionFacts::TopicVideo.new(name, item["title"], item["href"])
       video_topic.doctors_note
       list << video_topic
     end
