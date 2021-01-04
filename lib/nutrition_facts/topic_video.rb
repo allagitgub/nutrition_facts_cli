@@ -1,4 +1,4 @@
-class TopicVideo
+class NutritionFacts::TopicVideo
 
   attr_accessor :topic_name, :video_name, :doctors_note, :url, :vide_url
 

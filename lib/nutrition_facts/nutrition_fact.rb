@@ -1,6 +1,6 @@
 require_relative 'topic_video'
 
-class NutritionFact
+class NutritionFacts::NutritionFact
   attr_accessor :name, :url, :doctors_note, :list_of_videos
 
   @doc = nil

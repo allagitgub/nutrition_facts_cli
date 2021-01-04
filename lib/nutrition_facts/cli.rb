@@ -1,7 +1,7 @@
 require_relative 'nutrition_fact'
 require_relative 'scraper'
 
-class CLI
+class NutritionFacts::CLI
 
 def call
 Scraper.new.get_all_topics
