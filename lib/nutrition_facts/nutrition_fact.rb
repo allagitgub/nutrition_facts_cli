@@ -1,6 +1,6 @@
 require_relative 'topic_video'
 
-class NutritionTopic
+class NutritionFact
   attr_accessor :name, :url, :doctors_note, :list_of_videos
 
   @doc = nil
@@ -30,7 +30,7 @@ class NutritionTopic
 
   def self.create_and_save_topic_from_a_element(a_element, store)
     a_element.each do |item|
-      topic = NutritionTopic.new(item["title"], item["href"])
+      topic = opic.new(item["title"], item["href"])
       store << topic
     end
   end
