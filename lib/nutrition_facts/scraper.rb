@@ -1,8 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
-require_relative 'nutrition_fact'
-
 class NutritionFacts::Scraper
   #attr_accessor :page
  @@page = nil

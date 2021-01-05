@@ -1,6 +1,3 @@
-require_relative 'nutrition_fact'
-require_relative 'scraper'
-
 class NutritionFacts::CLI
 
 def call
