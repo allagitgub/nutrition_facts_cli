@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/nutrition_facts/cli.rb'
+require_relative '../lib/nutrition_facts'
 
 NutritionFacts::CLI.new.start
