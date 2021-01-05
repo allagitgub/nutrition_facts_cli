@@ -28,10 +28,10 @@ def start
     puts ""
     if choice == "popular"
       NutritionFacts::Scraper.get_popular_topics
-      NutritionFacts::NutritionTopic.display_popular_topics
+      NutritionFacts::NutritionFact.display_popular_topics
     else
         NutritionFacts::Scraper.get_all_topics
-        NutritionFacts::NutritionTopic.display_topics_by_letter(choice.capitalize)
+        NutritionFacts::NutritionFact.display_topics_by_letter(choice.capitalize)
     end
 
     list_of_topic_videos = []
@@ -43,10 +43,10 @@ def start
       input = gets.strip.chomp
       puts "Retrieving information..."
       if choice == "popular"
-        list_of_topic_videos = NutritionFacts::NutritionTopic.lookup_topic_info(input)
+        list_of_topic_videos = NutritionFacts::NutritionFact.lookup_topic_info(input)
       else
         letter = input[0].capitalize
-        list_of_topic_videos = NutritionFacts::NutritionTopic.lookup_topic_info_by_letter(input, letter)
+        list_of_topic_videos = NutritionFacts::NutritionFact.lookup_topic_info_by_letter(input, letter)
       end
       if list_of_topic_videos == nil || list_of_topic_videos.count == 0
         puts ""
@@ -92,6 +92,6 @@ def start
     puts ""
   end
 end
-end
 
-NutritionFacts::CLI.new.start
+
+end

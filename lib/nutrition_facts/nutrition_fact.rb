@@ -28,7 +28,7 @@ class NutritionFacts::NutritionFact
 
   def self.create_and_save_topic_from_a_element(a_element, store)
     a_element.each do |item|
-      topic = opic.new(item["title"], item["href"])
+      topic = NutritionFacts::NutritionFact.new(item["title"], item["href"])
       store << topic
     end
   end
