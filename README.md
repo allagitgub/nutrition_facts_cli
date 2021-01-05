@@ -21,9 +21,11 @@ Then follow the prompt
 checkout the repository from GitHub with the below command
 git clone git@github.com:allagitgub/nutrition_facts_cli.git
 
+the main classes are located under nutrition_facts_cli/lib/nutrition_facts, the are all part of nutrition_facts module specified directly under lib directory
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/dannyd4315/worlds-best-restaurants-cli-gem. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/allagitgub/nutrition_facts_cli.git.
 
 
 ## License
