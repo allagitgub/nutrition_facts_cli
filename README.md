@@ -1,6 +1,7 @@
 # Nutrition Facts
 
 This Ruby program provides a CLI to view Nutrition Facts compiled by Dr. Michael Greger M.D. FACLM. The information has been taken from his website - https://nutritionfacts.org
+A user is presented with a choice of viewing the topics from the popular list or by a letter of the alphabet. When a user makes a choice, they are presented with a list of nutrition topics to pick from. They can then pick a topic and the program will provide them with another list of topics/discussions on the topic they chose. They can then pick from that list to see more details, once they pick they will get a link to a YouTube presentation of Dr. Greger and a Dr. note.
 
 
 ## Installation
