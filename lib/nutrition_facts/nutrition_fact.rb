@@ -1,3 +1,5 @@
+require 'pry'
+
 class NutritionFacts::NutritionFact
   attr_accessor :name, :url, :doctors_note, :list_of_videos
 
@@ -28,7 +30,7 @@ class NutritionFacts::NutritionFact
 
   def self.create_and_save_topic_from_a_element(a_element, store)
     a_element.each do |item|
-      topic = NutritionFacts::NutritionFact.new(item["title"], item["href"])
+      topic = self.new(item["title"], item["href"])
       store << topic
     end
   end
@@ -46,14 +48,15 @@ class NutritionFacts::NutritionFact
   end
 
   def get_list_of_videos
-    list = []
-    doc.css(".topic-videos").css(".container").css(".list-unstyled").css('a').each do |item|
+    #list = []
+    doc.css(".topic-videos").css(".container").css(".list-unstyled").css('a').map do |item|
       video_topic = NutritionFacts::TopicVideo.new(name, item["title"], item["href"])
       video_topic.doctors_note
-      list << video_topic
-    end
-    list
+      #list << video_topic
+      video_topic
+    end.sort_by {|obj| obj.video_name}
   end
+
 
   def get_doctors_note
   end
